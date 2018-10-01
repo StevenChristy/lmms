@@ -26,6 +26,7 @@ set(LMMS_SRCS
 	core/InstrumentPlayHandle.cpp
 	core/InstrumentSoundShaping.cpp
 	core/JournallingObject.cpp
+	core/KeyStore.cpp
 	core/Ladspa2LMMS.cpp
 	core/LadspaControl.cpp
 	core/LadspaManager.cpp

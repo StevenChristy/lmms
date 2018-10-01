@@ -100,6 +100,43 @@ ExportProjectDialog::ExportProjectDialog( const QString & _file_name,
 
 	connect( startButton, SIGNAL( clicked() ),
 			this, SLOT( startBtnClicked() ) );
+
+	KeyStore &kvs = Engine::getSong()->m_keyValueStores.getStore("$$exportprojectsettings");
+	int intvalue;
+	QString strvalue;
+	bool boolvalue;
+	if ( kvs.getValue("loopCountSB.value", intvalue) && intvalue>=loopCountSB->minimum() && intvalue<=loopCountSB->maximum() )
+		loopCountSB->setValue(intvalue);
+	if ( kvs.getValue("checkBoxVariableBitRate.value", boolvalue) )
+		checkBoxVariableBitRate->setChecked(boolvalue);
+	if ( kvs.getValue("exportLoopCB.value", boolvalue) )
+		exportLoopCB->setChecked(boolvalue);
+	if ( kvs.getValue("renderMarkersCB.value", boolvalue) )
+		renderMarkersCB->setChecked(boolvalue);
+	if ( kvs.getValue( "interpolationCB.value", intvalue ) && intvalue >= 0 && intvalue < interpolationCB->count() )
+		interpolationCB->setCurrentIndex(intvalue);
+	if ( kvs.getValue( "oversamplingCB.value", intvalue ) && intvalue >= 0 && intvalue < oversamplingCB->count() )
+		oversamplingCB->setCurrentIndex(intvalue);
+	if ( kvs.getValue( "stereoModeComboBox.value", intvalue ) && intvalue >= 0 && intvalue < stereoModeComboBox->count() )
+		stereoModeComboBox->setCurrentIndex(intvalue);
+	if ( kvs.getValue( "bitrateCB.value", intvalue ) && intvalue >= 0 && intvalue < bitrateCB->count() )
+		bitrateCB->setCurrentIndex(intvalue);
+	if ( kvs.getValue( "samplerateCB.value", intvalue ) && intvalue >= 0 && intvalue < samplerateCB->count() )
+		samplerateCB->setCurrentIndex(intvalue);  
+#ifdef LMMS_HAVE_SF_COMPLEVEL
+	if ( kvs.getValue( "compLevelCB.value", intvalue ) && intvalue >= 0 && intvalue < compLevelCB->count() )
+		compLevelCB->setCurrentIndex(intvalue);  
+#endif
+	if ( kvs.getValue("titleTagLE.value", strvalue ) )
+		titleTagLE->setText(strvalue);
+	if ( kvs.getValue("artistTagLE.value", strvalue ) )
+		artistTagLE->setText(strvalue);
+	if ( kvs.getValue("albumTagLE.value", strvalue ) )
+		albumTagLE->setText(strvalue);
+	if ( kvs.getValue("genreTagLE.value", strvalue ) )
+		genreTagLE->setText(strvalue);
+	if ( kvs.getValue("yearTagLE.value", strvalue ) )
+		yearTagLE->setText(strvalue);
 }
 
 
@@ -170,6 +207,11 @@ void ExportProjectDialog::startExport()
 			bitRateSettings,
 			static_cast<OutputSettings::BitDepth>( depthCB->currentIndex() ),
 			mapToStereoMode(stereoModeComboBox->currentIndex()) );
+	os.setTitle(titleTagLE->text());
+	os.setArtist(artistTagLE->text());
+	os.setAlbum(albumTagLE->text());
+	os.setGenre(genreTagLE->text());
+	os.setYear(yearTagLE->text());
 
 	if (compressionWidget->isVisible())
 	{
@@ -251,6 +293,25 @@ void ExportProjectDialog::onFileFormatChanged(int index)
 
 void ExportProjectDialog::startBtnClicked()
 {
+	auto &kvs = Engine::getSong()->m_keyValueStores.getStore( "$$exportprojectsettings" );
+	kvs.setValue( "loopCountSB.value", loopCountSB->value() );
+	kvs.setValue( "exportLoopCB.value", exportLoopCB->isChecked() );
+	kvs.setValue( "renderMarkersCB.value", renderMarkersCB->isChecked() );
+	kvs.setValue( "checkBoxVariableBitRate.value", checkBoxVariableBitRate->isChecked() );
+	kvs.setValue( "interpolationCB.value", interpolationCB->currentIndex() );
+	kvs.setValue( "oversamplingCB.value", oversamplingCB->currentIndex() );
+	kvs.setValue( "stereoModeComboBox.value", stereoModeComboBox->currentIndex() );
+	kvs.setValue( "bitrateCB.value", bitrateCB->currentIndex() );
+	kvs.setValue( "samplerateCB.value", samplerateCB->currentIndex() );
+#ifdef LMMS_HAVE_SF_COMPLEVEL
+	kvs.setValue( "compLevelCB.value", compLevelCB->currentIndex() );
+#endif
+	kvs.setValue( "titleTagLE.value", titleTagLE->text());
+	kvs.setValue( "artistTagLE.value", artistTagLE->text());
+	kvs.setValue( "albumTagLE.value", albumTagLE->text());
+	kvs.setValue( "genreTagLE.value", genreTagLE->text());
+	kvs.setValue( "yearTagLE.value", yearTagLE->text());
+
 	m_ft = ProjectRenderer::NumFileFormats;
 
 	// Get file format from current menu selection.

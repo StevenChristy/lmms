@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
-    <height>374</height>
+    <width>579</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>379</width>
+    <width>579</width>
     <height>400</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>379</width>
+    <width>579</width>
     <height>400</height>
    </size>
   </property>
@@ -27,426 +27,502 @@
   </property>
   <layout class="QVBoxLayout">
    <item>
-    <widget class="QCheckBox" name="exportLoopCB">
-     <property name="text">
-      <string>Export as loop (remove extra bar)</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="renderMarkersCB">
-     <property name="text">
-      <string>Export between loop markers</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QWidget" name="loopRepeatWidget" native="true">
-     <layout class="QHBoxLayout" name="loopRepeatHL">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="labelLoopRepeat">
-        <property name="text">
-         <string>Render Looped Section:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="loopCountSB">
-        <property name="suffix">
-         <string> time(s)</string>
-        </property>
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="maximum">
-         <number>9</number>
-        </property>
-        <property name="value">
-         <number>1</number>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
     <layout class="QHBoxLayout">
      <item>
-      <widget class="QGroupBox" name="outputGroupBox">
-       <property name="title">
-        <string>File format settings</string>
-       </property>
-       <layout class="QVBoxLayout">
-        <item>
-         <widget class="QLabel" name="label">
-          <property name="text">
-           <string>File format:</string>
+      <layout class="QVBoxLayout">
+       <item>
+        <widget class="QCheckBox" name="exportLoopCB">
+         <property name="text">
+          <string>Export as loop (remove extra bar)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="renderMarkersCB">
+         <property name="text">
+          <string>Export between loop markers</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="loopRepeatWidget" native="true">
+         <layout class="QHBoxLayout" name="loopRepeatHL">
+          <property name="leftMargin">
+           <number>0</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="fileFormatCB"/>
-        </item>
-        <item>
-         <widget class="QWidget" name="sampleRateWidget" native="true">
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="labelSampleRate">
-             <property name="text">
-              <string>Sampling rate:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="samplerateCB">
-             <item>
-              <property name="text">
-               <string>44100 Hz</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>48000 Hz</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>88200 Hz</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>96000 Hz</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>192000 Hz</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="depthWidget" native="true">
-          <layout class="QVBoxLayout">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="labelBitDepth">
-             <property name="text">
-              <string>Bit depth:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="depthCB">
-             <property name="currentIndex">
-              <number>1</number>
-             </property>
-             <item>
-              <property name="text">
-               <string>16 Bit integer</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>24 Bit integer</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>32 Bit float</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="stereoModeWidget" native="true">
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="labelStereoMode_3">
-             <property name="text">
-              <string>Stereo mode:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="stereoModeComboBox">
-             <property name="currentIndex">
-              <number>1</number>
-             </property>
-             <item>
-              <property name="text">
-               <string>Mono</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Stereo</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Joint stereo</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="compressionWidget" native="true">
-          <layout class="QVBoxLayout" name="_2">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="labelCompLevel">
-             <property name="text">
-              <string>Compression level:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="compLevelCB">
-             <property name="currentIndex">
-              <number>-1</number>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="bitrateWidget" native="true">
-          <layout class="QVBoxLayout">
-           <property name="leftMargin">
-            <number>0</number>
-           </property>
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <property name="rightMargin">
-            <number>0</number>
-           </property>
-           <property name="bottomMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="labelBitRate">
-             <property name="text">
-              <string>Bitrate:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="bitrateCB">
-             <property name="currentIndex">
-              <number>2</number>
-             </property>
-             <item>
-              <property name="text">
-               <string>64 KBit/s</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>128 KBit/s</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>160 KBit/s</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>192 KBit/s</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>256 KBit/s</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>320 KBit/s</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="checkBoxVariableBitRate">
-             <property name="text">
-              <string>Use variable bitrate</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+          <property name="topMargin">
+           <number>0</number>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
+          <property name="rightMargin">
+           <number>0</number>
           </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="labelLoopRepeat">
+            <property name="text">
+             <string>Render Looped Section:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="loopCountSB">
+            <property name="suffix">
+             <string> time(s)</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>9</number>
+            </property>
+            <property name="value">
+             <number>1</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout">
+         <item>
+          <widget class="QGroupBox" name="outputGroupBox">
+           <property name="title">
+            <string>File format settings</string>
+           </property>
+           <layout class="QVBoxLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>File format:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="fileFormatCB"/>
+            </item>
+            <item>
+             <widget class="QWidget" name="sampleRateWidget" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="labelSampleRate">
+                 <property name="text">
+                  <string>Sampling rate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="samplerateCB">
+                 <item>
+                  <property name="text">
+                   <string>44100 Hz</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>48000 Hz</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>88200 Hz</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>96000 Hz</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>192000 Hz</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="depthWidget" native="true">
+              <layout class="QVBoxLayout">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="labelBitDepth">
+                 <property name="text">
+                  <string>Bit depth:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="depthCB">
+                 <property name="currentIndex">
+                  <number>1</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>16 Bit integer</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>24 Bit integer</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>32 Bit float</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="stereoModeWidget" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="labelStereoMode_3">
+                 <property name="text">
+                  <string>Stereo mode:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="stereoModeComboBox">
+                 <property name="currentIndex">
+                  <number>1</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>Mono</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Stereo</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Joint stereo</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="compressionWidget" native="true">
+              <layout class="QVBoxLayout" name="_2">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="labelCompLevel">
+                 <property name="text">
+                  <string>Compression level:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="compLevelCB">
+                 <property name="currentIndex">
+                  <number>-1</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="bitrateWidget" native="true">
+              <layout class="QVBoxLayout">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="labelBitRate">
+                 <property name="text">
+                  <string>Bitrate:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="bitrateCB">
+                 <property name="currentIndex">
+                  <number>2</number>
+                 </property>
+                 <item>
+                  <property name="text">
+                   <string>64 KBit/s</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>128 KBit/s</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>160 KBit/s</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>192 KBit/s</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>256 KBit/s</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>320 KBit/s</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBoxVariableBitRate">
+                 <property name="text">
+                  <string>Use variable bitrate</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="qualityGroupBox">
+           <property name="title">
+            <string>Quality settings</string>
+           </property>
+           <layout class="QVBoxLayout">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Interpolation:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="interpolationCB">
+              <property name="currentIndex">
+               <number>2</number>
+              </property>
+              <item>
+               <property name="text">
+                <string>Zero order hold</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sinc worst (fastest)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sinc medium (recommended)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Sinc best (slowest)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Oversampling:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="oversamplingCB">
+              <item>
+               <property name="text">
+                <string>1x (None)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>2x</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>4x</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>8x</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <spacer>
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QGroupBox" name="qualityGroupBox">
+      <widget class="QGroupBox" name="tagsGroupBox">
        <property name="title">
-        <string>Quality settings</string>
+        <string>Tags</string>
+       </property>
+       <property name="fixedWidth">
+        <number>200</number>
        </property>
        <layout class="QVBoxLayout">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="label_title_tag">
           <property name="text">
-           <string>Interpolation:</string>
+           <string>Title:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="interpolationCB">
-          <property name="currentIndex">
-           <number>2</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>Zero order hold</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Sinc worst (fastest)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Sinc medium (recommended)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Sinc best (slowest)</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QLineEdit" name="titleTagLE">
+
+        </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="label_artist_tag">
           <property name="text">
-           <string>Oversampling:</string>
+           <string>Artist:</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="oversamplingCB">
-          <item>
-           <property name="text">
-            <string>1x (None)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2x</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4x</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>8x</string>
-           </property>
-          </item>
+         <widget class="QLineEdit" name="artistTagLE">
+        </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_album_tag">
+          <property name="text">
+           <string>Album:</string>
+          </property>
          </widget>
         </item>
         <item>
-         <spacer>
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+         <widget class="QLineEdit" name="albumTagLE">
+        </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_genre_tag">
+          <property name="text">
+           <string>Genre:</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="genreTagLE">
+        </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_year_tag">
+          <property name="text">
+           <string>Year:</string>
           </property>
-         </spacer>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="yearTagLE">
+        </widget>
         </item>
        </layout>
       </widget>

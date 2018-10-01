@@ -102,6 +102,31 @@ public:
 		// legal range is 0.0 to 1.0.
 		m_compressionLevel = level;
 	}
+	
+	QString getTitle() const { return m_title; }
+	void setTitle( QString value ) {
+		m_title = value;
+	}
+	
+	QString getArtist() const { return m_artist; }
+	void setArtist( QString value ) {
+		m_artist = value;
+	}
+	
+	QString getAlbum() const { return m_album; }
+	void setAlbum( QString value ) {
+		m_album = value;
+	}
+	
+	QString getYear() const { return m_year; }
+	void setYear( QString value ) {
+		m_year = value;
+	}
+	
+	QString getGenre() const { return m_genre; }
+	void setGenre( QString value ) {
+		m_genre = value;
+	}
 
 private:
 	sample_rate_t m_sampleRate;
@@ -109,6 +134,11 @@ private:
 	BitDepth m_bitDepth;
 	StereoMode m_stereoMode;
 	double m_compressionLevel;
+	QString m_title;
+	QString m_artist;
+	QString m_album;
+	QString m_year;
+	QString m_genre;    
 };
 
 #endif

@@ -35,6 +35,7 @@
 #include "MeterModel.h"
 #include "Mixer.h"
 #include "VstSyncController.h"
+#include "KeyStore.h"
 
 
 class AutomationTrack;
@@ -323,6 +324,8 @@ public:
 
 	inline void setLoadOnLauch(bool value) { m_loadOnLaunch = value; }
 
+	KeyStores m_keyValueStores;
+    
 public slots:
 	void playSong();
 	void record();

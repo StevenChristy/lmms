@@ -32,6 +32,7 @@
 
 
 #include <string>
+#include <vector>
 #include <vorbis/vorbisenc.h>
 
 #include "Mixer.h"
@@ -70,15 +71,36 @@ inline int AudioFileOgg::writePage()
 
 bool AudioFileOgg::startEncoding()
 {
-	vorbis_comment vc;
-	const char * comments = "Cool=This song has been made using LMMS";
-	std::string user_comments_str(comments);
-	int comment_length = user_comments_str.size();
-	char * user_comments = &user_comments_str[0];
+	const char * cool_comment = "Cool=This song has been made using LMMS";
+	const int max_comments = 10;
+	const char *user_comments[max_comments];
+	int user_comments_lengths[max_comments];
+	std::vector<std::string> comments;
 
-	vc.user_comments = &user_comments;
-	vc.comment_lengths = &comment_length;
-	vc.comments = 1;
+	comments.push_back(cool_comment);
+	if ( getOutputSettings().getTitle().length() )
+		comments.push_back( std::string("TITLE=") + std::string(getOutputSettings().getTitle().toLocal8Bit()) );
+	if ( getOutputSettings().getArtist().length() )
+		comments.push_back( std::string("ARTIST=") + std::string(getOutputSettings().getArtist().toLocal8Bit()) );
+	if ( getOutputSettings().getAlbum().length() )
+		comments.push_back( std::string("ALBUM=") + std::string(getOutputSettings().getAlbum().toLocal8Bit()) );
+	if ( getOutputSettings().getGenre().length() )
+		comments.push_back( std::string("GENRE=") + std::string(getOutputSettings().getGenre().toLocal8Bit()) );
+	if ( getOutputSettings().getYear().length() )
+		comments.push_back( std::string("YEAR=") + std::string(getOutputSettings().getYear().toLocal8Bit()) );
+
+	if ( comments.size() > max_comments ) comments.resize(max_comments);
+
+	for ( int x = 0; x < comments.size(); x++ ) 
+	{
+		user_comments[x] = comments[x].c_str();
+		user_comments_lengths[x] = comments[x].size();
+	}
+
+	vorbis_comment vc;
+	vc.user_comments = const_cast<char**>(&user_comments[0]);
+	vc.comment_lengths = &user_comments_lengths[0];
+	vc.comments = comments.size();
 	vc.vendor = NULL;
 
 	m_channels = channels();

@@ -940,6 +940,8 @@ void Song::clearProject()
 	Engine::projectJournal()->setJournalling( true );
 
 	InstrumentTrackView::cleanupWindowCache();
+
+	m_keyValueStores.clearAllStores();
 }
 
 
@@ -1124,6 +1126,10 @@ void Song::loadProject( const QString & fileName )
 			{
 				restoreControllerStates( node.toElement() );
 			}
+			else if( node.nodeName() == m_keyValueStores.nodeName() ) 
+			{
+				m_keyValueStores.restoreState(node.toElement());
+			}
 			else if( gui )
 			{
 				if( node.nodeName() == gui->getControllerRackView()->nodeName() )
@@ -1226,6 +1232,8 @@ bool Song::saveProjectFile( const QString & filename )
 	}
 
 	saveControllerStates( dataFile, dataFile.content() );
+
+	m_keyValueStores.saveState(dataFile, dataFile.content());
 
 	return dataFile.writeFile( filename );
 }

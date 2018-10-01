@@ -88,7 +88,12 @@ bool AudioFileWave::startEncoding()
 	// Prevent fold overs when encountering clipped data
 	sf_command(m_sf, SFC_SET_CLIPPING, NULL, SF_TRUE);
 
-	sf_set_string ( m_sf, SF_STR_SOFTWARE, "LMMS" );
+	sf_set_string( m_sf, SF_STR_SOFTWARE, "LMMS" );
+	sf_set_string( m_sf, SF_STR_TITLE, getOutputSettings().getTitle().toLocal8Bit());
+	sf_set_string( m_sf, SF_STR_ARTIST, getOutputSettings().getArtist().toLocal8Bit());
+	sf_set_string( m_sf, SF_STR_ALBUM, getOutputSettings().getAlbum().toLocal8Bit());
+	sf_set_string( m_sf, SF_STR_GENRE, getOutputSettings().getGenre().toLocal8Bit());
+	sf_set_string( m_sf, SF_STR_DATE, getOutputSettings().getYear().toLocal8Bit());
 
 	return true;
 }

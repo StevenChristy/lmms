@@ -121,6 +121,11 @@ bool AudioFileMP3::initEncoder()
 
 	// Add a comment
 	id3tag_set_comment(m_lame, "Created with LMMS");
+	id3tag_set_title(m_lame, getOutputSettings().getTitle().toLocal8Bit());
+	id3tag_set_artist(m_lame, getOutputSettings().getArtist().toLocal8Bit());
+	id3tag_set_album(m_lame, getOutputSettings().getAlbum().toLocal8Bit());
+	id3tag_set_genre(m_lame, getOutputSettings().getGenre().toLocal8Bit());
+	id3tag_set_year(m_lame, getOutputSettings().getYear().toLocal8Bit());
 
 	return lame_init_params(m_lame) != -1;
 }
