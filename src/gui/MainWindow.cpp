@@ -1571,30 +1571,57 @@ void MainWindow::exportProject(bool multiExport)
 
 	FileDialog efd( gui->mainWindow() );
 
+	KeyStore &kvs = Engine::getSong()->m_keyValueStores.getStore("$$exportprojectsettings");
 	if ( multiExport )
 	{
 		efd.setFileMode( FileDialog::Directory);
 		efd.setWindowTitle( tr( "Select directory for writing exported tracks..." ) );
-		if( !projectFileName.isEmpty() )
+		QString savedExportDir;
+		if ( kvs.getValue("exportDirectory", savedExportDir) && QFileInfo(savedExportDir).exists() )
+		{
+			efd.setDirectory(savedExportDir);
+		}
+		else if( !projectFileName.isEmpty() )
 		{
 			efd.setDirectory( QFileInfo( projectFileName ).absolutePath() );
 		}
 	}
 	else
 	{
+		QStringList types;
 		efd.setFileMode( FileDialog::AnyFile );
 		int idx = 0;
-		QStringList types;
+		QString extension = ProjectRenderer::fileEncodeDevices[0].m_extension;
+		QString nameFilter;
+		QString savedExtension;
+		kvs.getValue("exportFileName.extension", savedExtension);
 		while( ProjectRenderer::fileEncodeDevices[idx].m_fileFormat != ProjectRenderer::NumFileFormats)
 		{
-			if(ProjectRenderer::fileEncodeDevices[idx].isAvailable()) {
-				types << tr(ProjectRenderer::fileEncodeDevices[idx].m_description);
+			if(ProjectRenderer::fileEncodeDevices[idx].isAvailable()) 
+			{
+				QString typeDesc = tr(ProjectRenderer::fileEncodeDevices[idx].m_description);
+				types << typeDesc;
+				if ( savedExtension.length() > 0 && ProjectRenderer::fileEncodeDevices[idx].m_extension == savedExtension ) 
+				{
+					extension = ProjectRenderer::fileEncodeDevices[idx].m_extension;
+					nameFilter = typeDesc;
+				}
 			}
 			++idx;
 		}
+
 		efd.setNameFilters( types );
+		if ( nameFilter.length() > 0 )
+			efd.selectNameFilter(nameFilter);
+
 		QString baseFilename;
-		if( !projectFileName.isEmpty() )
+		QString savedExportFileName;
+		if ( kvs.getValue("exportFileName", savedExportFileName) && QFileInfo(savedExportFileName).absoluteDir().exists() )
+		{
+			efd.setDirectory(QFileInfo(savedExportFileName).absolutePath());
+			baseFilename = QFileInfo(savedExportFileName).completeBaseName();
+		}
+		else if( !projectFileName.isEmpty() )
 		{
 			efd.setDirectory( QFileInfo( projectFileName ).absolutePath() );
 			baseFilename = QFileInfo( projectFileName ).completeBaseName();
@@ -1604,7 +1631,7 @@ void MainWindow::exportProject(bool multiExport)
 			efd.setDirectory( ConfigManager::inst()->userProjectsDir() );
 			baseFilename = tr( "untitled" );
 		}
-		efd.selectFile( baseFilename + ProjectRenderer::fileEncodeDevices[0].m_extension );
+		efd.selectFile( baseFilename + extension );
 		efd.setWindowTitle( tr( "Select file for project-export..." ) );
 	}
 
@@ -1637,6 +1664,13 @@ void MainWindow::exportProject(bool multiExport)
 					}
 				}
 			}
+
+			kvs.setValue("exportFileName.extension", suffix);
+			kvs.setValue("exportFileName", exportFileName);
+		}
+		else
+		{
+			kvs.setValue("exportDirectory", exportFileName);
 		}
 
 		ExportProjectDialog epd( exportFileName, gui->mainWindow(), multiExport );

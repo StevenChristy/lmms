@@ -55,6 +55,12 @@ ExportProjectDialog::ExportProjectDialog( const QString & _file_name,
 		fileExt = "." + parts[parts.size()-1];
 	}
 
+	KeyStore &kvs = Engine::getSong()->m_keyValueStores.getStore("$$exportprojectsettings");
+	if ( m_multiExport )
+	{
+		kvs.getValue("multiFile.extension", fileExt);
+	}
+	
 	int cbIndex = 0;
 	for( int i = 0; i < ProjectRenderer::NumFileFormats; ++i )
 	{
@@ -101,10 +107,9 @@ ExportProjectDialog::ExportProjectDialog( const QString & _file_name,
 	connect( startButton, SIGNAL( clicked() ),
 			this, SLOT( startBtnClicked() ) );
 
-	KeyStore &kvs = Engine::getSong()->m_keyValueStores.getStore("$$exportprojectsettings");
-	int intvalue;
+	int intvalue=0;
 	QString strvalue;
-	bool boolvalue;
+	bool boolvalue=false;
 	if ( kvs.getValue("loopCountSB.value", intvalue) && intvalue>=loopCountSB->minimum() && intvalue<=loopCountSB->maximum() )
 		loopCountSB->setValue(intvalue);
 	if ( kvs.getValue("checkBoxVariableBitRate.value", boolvalue) )
@@ -337,6 +342,8 @@ void ExportProjectDialog::startBtnClicked()
 		if (m_ft == ProjectRenderer::fileEncodeDevices[i].m_fileFormat)
 		{
 			m_fileExtension = QString( QLatin1String( ProjectRenderer::fileEncodeDevices[i].m_extension ) );
+			kvs.setValue( m_multiExport ? "multiFile.extension" : "exportFileName.extension", 
+						m_fileExtension );
 			break;
 		}
 	}
